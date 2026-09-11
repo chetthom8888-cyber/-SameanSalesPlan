@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ផែនការលក់របស់សាមាន</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f4f7;
+      color: #17202a;
+    }
+
+    .app {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px 16px 40px;
+    }
+
+    .header {
+      background: #17202a;
+      color: white;
+      padding: 22px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      margin: 0 0 7px;
+      font-size: 24px;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .title {
+      font-size: 14px;
+      color: #68727d;
+    }
+
+    .number {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .menu button {
+      border: none;
+      background: white;
+      border-radius: 18px;
+      padding: 20px 10px;
+      font-size: 27px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .menu button div {
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .progress {
+      height: 10px;
+      background: #e5e8eb;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress div {
+      width: 0%;
+      height: 100%;
+      background: #17202a;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 22px 3px 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <h1>ផែនការលក់របស់សាមាន</h1>
+    <p>ប្រព័ន្ធគ្រប់គ្រងការងារលក់ផ្ទាល់ខ្លួន</p>
+  </div>
+
+  <div class="card">
+    <div class="title">💰 ការលក់ថ្ងៃនេះ</div>
+    <div class="number">0 ៛</div>
+  </div>
+
+  <div class="two">
+
+    <div class="card">
+      <div class="title">👥 អតិថិជន</div>
+      <div class="number">0</div>
+    </div>
+
+    <div class="card">
+      <div class="title">📍 ចុះជួបថ្ងៃនេះ</div>
+      <div class="number">0</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div style="display:flex;justify-content:space-between;">
+      <b>🎯 Target ប្រចាំខែ</b>
+      <b>0%</b>
+    </div>
+
+    <div class="progress">
+      <div></div>
+    </div>
+
+    <p style="font-size:13px;color:#68727d;">
+      0 ៛ / 0 ៛
+    </p>
+
+  </div>
+
+  <h2>មុខងារសំខាន់</h2>
+
+  <div class="menu">
+
+    <button>
+      👥
+      <div>អតិថិជន</div>
+    </button>
+
+    <button>
+      📍
+      <div>ការចុះជួប</div>
+    </button>
+
+    <button>
+      🛒
+      <div>ការលក់</div>
+    </button>
+
+    <button>
+      🗓️
+      <div>ផែនការថ្ងៃនេះ</div>
+    </button>
+
+    <button>
+      🎯
+      <div>Target</div>
+    </button>
+
+    <button>
+      📊
+      <div>របាយការណ៍</div>
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+  }
+</script>
+
+</body>
+</html>
