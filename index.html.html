@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ផែនការលក់របស់សាមាន</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#172033;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Khmer",Arial,sans-serif}
+header{background:#1677ff;color:white;padding:22px 18px;border-radius:0 0 24px 24px}h1{font-size:23px;margin:0 0 5px}.sub{font-size:14px;opacity:.9}
+main{max-width:720px;margin:auto;padding:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card,.item{background:white;border-radius:17px;padding:16px;box-shadow:0 2px 12px #0001}.section{margin-top:18px}
+h2{font-size:19px;margin:0 0 10px}.num{font-size:25px;font-weight:800;margin-top:7px}.muted{color:#687386;font-size:14px;margin-top:5px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #d8e0ea;border-radius:12px;font-size:16px;margin:5px 0 9px;background:white}textarea{min-height:80px}
+button{border:0;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700}.primary{background:#1677ff;color:white}.secondary{background:#eaf2ff;color:#1264d6}.danger{background:#ffeaea;color:#c33}
+.row{display:flex;gap:8px}.row>*{flex:1}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.actions button{font-size:13px;padding:9px}
+.hidden{display:none}.empty{text-align:center;color:#7b8492;padding:25px}.badge{display:inline-block;background:#eaf2ff;color:#1677ff;padding:5px 9px;border-radius:20px;font-size:12px}
+.progress{height:12px;background:#e7ecf3;border-radius:20px;overflow:hidden;margin:10px 0}.bar{height:100%;background:#1677ff;width:0}
+nav{position:sticky;bottom:0;background:#fffffff2;border-top:1px solid #ddd;padding:9px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;z-index:5}nav button{background:transparent;color:#596477;font-size:12px;padding:8px 2px}nav button.active{color:#1677ff;background:#edf4ff}
+</style>
+</head>
+<body>
+<header><h1>ផែនការលក់របស់សាមាន</h1><div class="sub">អតិថិជន • ចុះជួប • ការលក់ • Target • របាយការណ៍</div></header>
+<main>
+<section id="home">
+<div class="section"><h2>សង្ខេបថ្ងៃនេះ</h2><div class="grid">
+<div class="card"><span class="badge">អតិថិជន</span><div class="num" id="cc">0</div></div>
+<div class="card"><span class="badge">ការលក់ថ្ងៃនេះ</span><div class="num" id="ts">0៛</div></div>
+<div class="card"><span class="badge">ចុះជួបថ្ងៃនេះ</span><div class="num" id="tv">0</div></div>
+<div class="card"><span class="badge">Target</span><div class="num" id="tp">0%</div></div>
+</div></div>
+<div class="section card"><b>ផែនការលក់របស់សាមាន 👋</b><p class="muted">Version 2 — អាចកត់ត្រាការចុះជួប ការលក់ និង Target បាន។</p></div>
+</section>
+
+<section id="customers" class="hidden">
+<h2>👥 អតិថិជន</h2><div class="card">
+<input id="cn" placeholder="ឈ្មោះអ្នកទំនាក់ទំនង *"><input id="cs" placeholder="ឈ្មោះហាង"><input id="cp" type="tel" placeholder="លេខទូរស័ព្ទ"><input id="ca" placeholder="អាសយដ្ឋាន"><textarea id="co" placeholder="កំណត់ត្រា"></textarea>
+<div class="row"><button class="secondary" onclick="locate()">📍 កំណត់ទីតាំង</button><button class="primary" onclick="addCustomer()">រក្សាទុក</button></div><div id="ls" class="muted"></div>
+</div><div class="section"><h2>បញ្ជីអតិថិជន</h2><div id="cl"></div></div>
+</section>
+
+<section id="visits" class="hidden"><h2>📍 ចុះជួបអតិថិជន</h2><div class="card">
+<select id="vc"></select><select id="vr"><option value="">-- ជ្រើសលទ្ធផល --</option><option>បានជួប និងមានការកម្មង់</option><option>បានជួប តែមិនទាន់កម្មង់</option><option>មិនបានជួប</option><option>ត្រូវ Follow-up</option></select><textarea id="vn" placeholder="កំណត់ត្រាការជួប"></textarea><button class="primary" onclick="addVisit()">📍 រក្សាទុកការចុះជួប</button>
+</div><div class="section"><h2>ប្រវត្តិការចុះជួប</h2><div id="vl"></div></div></section>
+
+<section id="sales" class="hidden"><h2>🛒 ការលក់</h2><div class="card">
+<select id="sc"></select><input id="sp" placeholder="ឈ្មោះផលិតផល"><input id="sq" type="number" min="1" placeholder="ចំនួន"><input id="sa" type="number" min="0" placeholder="ទឹកប្រាក់សរុប (៛)"><textarea id="sn" placeholder="កំណត់ត្រា"></textarea><button class="primary" onclick="addSale()">💰 រក្សាទុកការលក់</button>
+</div><div class="section"><h2>ប្រវត្តិការលក់</h2><div id="sl"></div></div></section>
+
+<section id="target" class="hidden"><h2>🎯 Target</h2><div class="card">
+<input id="ta" type="number" min="0" placeholder="Target ប្រចាំខែ (៛)"><button class="primary" onclick="setTarget()">រក្សាទុក Target</button><div class="progress"><div id="tb" class="bar"></div></div><div id="tt" class="muted"></div>
+</div></section>
+
+<section id="reports" class="hidden"><h2>📊 របាយការណ៍</h2><div class="grid">
+<div class="card"><span class="badge">អតិថិជន</span><div class="num" id="rc">0</div></div><div class="card"><span class="badge">ចុះជួប</span><div class="num" id="rv">0</div></div><div class="card"><span class="badge">ការលក់</span><div class="num" id="rs">0៛</div></div><div class="card"><span class="badge">Target</span><div class="num" id="rt">0%</div></div>
+</div><div class="section card"><p id="reportText" class="muted"></p><button class="primary" onclick="shareReport()">📤 ចែករំលែករបាយការណ៍</button></div></section>
+</main>
+<nav>
+<button id="nh" class="active" onclick="show('home')">🏠<br>ដើម</button><button onclick="show('customers')">👥<br>អតិថិជន</button><button onclick="show('visits')">📍<br>ចុះជួប</button><button onclick="show('sales')">🛒<br>លក់</button>
+</nav>
+<script>
+const K={c:"samean_customers",v:"samean_visits",s:"samean_sales",t:"samean_target"};
+const load=(k,d)=>{try{let x=JSON.parse(localStorage.getItem(k));return Array.isArray(x)?x:d}catch(e){return d}};
+let C=load(K.c,[]),V=load(K.v,[]),S=load(K.s,[]),T=Number(localStorage.getItem(K.t)||0),lat=null,lon=null;
+const $=id=>document.getElementById(id),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const save=(k,x)=>localStorage.setItem(k,JSON.stringify(x)), day=d=>new Date(d).toISOString().slice(0,10), money=n=>Number(n||0).toLocaleString("en-US")+"៛";
+function total(){return S.reduce((a,x)=>a+Number(x.a||0),0)} function pct(){return T?Math.min(100,total()/T*100):0}
+function name(id){let x=C.find(c=>c.id==id);return x?x.n:"មិនស្គាល់"}
+function show(id){["home","customers","visits","sales","target","reports"].forEach(x=>$(x).classList.toggle("hidden",x!==id));document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));if(id==="customers")renderC();if(id==="visits"){fill();renderV()}if(id==="sales"){fill();renderS()}if(id==="target")renderT();if(id==="reports")renderR();dash()}
+function addCustomer(){let n=$("cn").value.trim();if(!n)return alert("សូមបញ្ចូលឈ្មោះអ្នកទំនាក់ទំនង");C.unshift({id:Date.now(),n,s:$("cs").value.trim(),p:$("cp").value.trim(),a:$("ca").value.trim(),o:$("co").value.trim(),lat,lon});save(K.c,C);["cn","cs","cp","ca","co"].forEach(x=>$(x).value="");$("ls").textContent="";lat=lon=null;renderC();dash();alert("រក្សាទុកអតិថិជនបានជោគជ័យ ✅")}
+function renderC(){$("cc").textContent=C.length;$("cl").innerHTML=C.length?C.map(c=>`<div class=item><b>${esc(c.n)}</b>${c.s?`<div class=muted>🏪 ${esc(c.s)}</div>`:""}${c.p?`<div class=muted>📞 ${esc(c.p)}</div>`:""}${c.a?`<div class=muted>🏠 ${esc(c.a)}</div>`:""}${typeof c.lat==="number"?'<div class=muted>📍 មានទីតាំងរក្សាទុក</div>':""}<div class=actions>${c.p?`<button class=secondary onclick="location.href='tel:${encodeURIComponent(c.p)}'">📞 ហៅ</button>`:""}${typeof c.lat==="number"?`<button class=secondary onclick="location.href='https://www.google.com/maps?q=${c.lat},${c.lon}'">🗺️ ផែនទី</button>`:""}<button class=danger onclick="delC(${c.id})">លុប</button></div></div>`).join(""):'<div class=empty>មិនទាន់មានអតិថិជនទេ</div>'}
+function delC(id){if(confirm("លុបអតិថិជននេះ?")){C=C.filter(x=>x.id!=id);save(K.c,C);renderC();dash()}}
+function locate(){if(!navigator.geolocation)return alert("មិនគាំទ្រ Location");$("ls").textContent="⏳ កំពុងទទួលទីតាំង...";navigator.geolocation.getCurrentPosition(p=>{lat=p.coords.latitude;lon=p.coords.longitude;$("ls").textContent="📍 ទទួលទីតាំងបានហើយ"},()=>{alert("សូមអនុញ្ញាត Location");$("ls").textContent=""},{enableHighAccuracy:true,timeout:10000})}
+function fill(){["vc","sc"].forEach(id=>$(id).innerHTML='<option value="">-- ជ្រើសអតិថិជន --</option>'+C.map(c=>`<option value="${c.id}">${esc(c.n)}${c.s?" - "+esc(c.s):""}</option>`).join(""))}
+function addVisit(){let c=Number($("vc").value),r=$("vr").value;if(!c)return alert("សូមជ្រើសរើសអតិថិជន");if(!r)return alert("សូមជ្រើសរើសលទ្ធផលការជួប");V.unshift({id:Date.now(),c,r,n:$("vn").value.trim(),d:new Date().toISOString()});save(K.v,V);$("vn").value="";$("vr").value="";renderV();dash();alert("រក្សាទុកការចុះជួបបានជោគជ័យ ✅")}
+function renderV(){$("vl").innerHTML=V.length?V.map(v=>`<div class=item><b>${esc(name(v.c))}</b><div class=muted>🕒 ${new Date(v.d).toLocaleString("km-KH")}</div><div class=muted>📌 ${esc(v.r)}</div>${v.n?`<div class=muted>📝 ${esc(v.n)}</div>`:""}</div>`).join(""):'<div class=empty>មិនទាន់មានប្រវត្តិការចុះជួបទេ</div>'}
+function addSale(){let c=Number($("sc").value),p=$("sp").value.trim(),q=Number($("sq").value),a=Number($("sa").value);if(!c)return alert("សូមជ្រើសរើសអតិថិជន");if(!p)return alert("សូមបញ្ចូលឈ្មោះផលិតផល");if(!q)return alert("សូមបញ្ចូលចំនួន");if(a<0||!Number.isFinite(a))return alert("សូមបញ្ចូលទឹកប្រាក់");S.unshift({id:Date.now(),c,p,q,a,n:$("sn").value.trim(),d:new Date().toISOString()});save(K.s,S);["sp","sq","sa","sn"].forEach(x=>$(x).value="");renderS();dash();alert("រក្សាទុកការលក់បានជោគជ័យ ✅")}
+function renderS(){$("sl").innerHTML=S.length?S.map(s=>`<div class=item><b>${esc(s.p)}</b><div class=muted>👤 ${esc(name(s.c))}</div><div class=muted>📦 ${s.q} | 💰 ${money(s.a)}</div><div class=muted>🕒 ${new Date(s.d).toLocaleString("km-KH")}</div></div>`).join(""):'<div class=empty>មិនទាន់មានការលក់ទេ</div>'}
+function setTarget(){T=Number($("ta").value||0);localStorage.setItem(K.t,T);renderT();dash();alert("រក្សាទុក Target បានជោគជ័យ ✅")}
+function renderT(){$("ta").value=T||"";let p=pct();$("tb").style.width=p+"%";$("tt").textContent=T?`លក់បាន ${money(total())} / Target ${money(T)} = ${p.toFixed(1)}%`:"មិនទាន់កំណត់ Target"}
+function dash(){let d=day(new Date()),ts=S.filter(x=>day(x.d)===d).reduce((a,x)=>a+Number(x.a||0),0),tv=V.filter(x=>day(x.d)===d).length,p=pct();$("cc").textContent=C.length;$("ts").textContent=money(ts);$("tv").textContent=tv;$("tp").textContent=p.toFixed(1)+"%"}
+function renderR(){let p=pct();$("rc").textContent=C.length;$("rv").textContent=V.length;$("rs").textContent=money(total());$("rt").textContent=p.toFixed(1)+"%";$("reportText").textContent=`របាយការណ៍៖ អតិថិជន ${C.length} នាក់ • ចុះជួប ${V.length} ដង • លក់សរុប ${money(total())} • Target ${p.toFixed(1)}%`}
+async function shareReport(){renderR();let x=$("reportText").textContent;if(navigator.share){try{await navigator.share({title:"របាយការណ៍ការលក់របស់សាមាន",text:x});return}catch(e){}}try{await navigator.clipboard.writeText(x);alert("បានចម្លងរបាយការណ៍។ អ្នកអាច Paste ទៅ Telegram បាន។")}catch(e){alert(x)}}
+try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}
+save(K.c,C);save(K.v,V);save(K.s,S);renderC();dash();
+</script>
+</body>
+</html>
